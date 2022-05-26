@@ -1,5 +1,29 @@
 #List and dicts comprehension
 #Manejo de errores y de archivos
+import os
+import random
+
+def hangman_game(dic, word_list):
+    hidden_list = []
+    random_nummber = random.choice(range(0, 118))
+    for i, word in enumerate(word_list):
+        if i == random_nummber:
+            key = word
+    print(key)
+    for k, v in dic.items():
+        if k == key:
+            word_in_slices = v
+            for i in range(len(word_in_slices)):
+                hidden_list.append('-')
+            print(''.join(hidden_list))
+            for i in range(len(key)+3):
+                attempt = input('')
+                for i, character in enumerate(word_in_slices):
+                    if character == attempt:
+                        hidden_list[i] = attempt
+                os.system('cls')
+                print(''.join(hidden_list))
+            
 def slices(word):
     list_characters = []
     for i in range(len(word)):
@@ -10,7 +34,7 @@ def database(word_list):
     dic = {}
     for word in word_list:
         dic[word] = slices(word)
-    print(dic)
+    hangman_game(dic, word_list)
 
 def run():
     with open('./archivos/data.txt', 'r', encoding="utf-8") as f:
@@ -19,60 +43,3 @@ def run():
 
 if __name__=='__main__':
     run()
-
-"""
-import os
-import random
-
-def run():
-    lista_random = ['car', 'aire']
-    dic = {
-        'car': ['c', 'a', 'r'],
-        'aire': ['a','i','r','e']
-    }
-    lista_2 = []
-    palabra_aleatoria = random.choice(range(0, 2))
-    print(palabra_aleatoria)
-    for i, word in enumerate(lista_random):
-        if i == palabra_aleatoria:
-            llave = word
-            print(llave)
-    for k, v in dic.items():
-        if llave == k:
-            lista = v
-            for i in range(len(lista)):
-                lista_2.append('-')
-            print(''.join(lista_2))
-            for i in range(4):
-                attempt = input('')
-                for i, c in enumerate(lista):
-                    if c == attempt:
-                        lista_2[i] = attempt
-                os.system('cls')
-                print(''.join(lista_2))
-            if ((''.join(lista_2))== (''.join(lista))):
-                print('Ganaste')
-                break
-            else:
-                print('Malardo')
-
-if __name__=='__main__':
-    run()
-"""
-
-
-"""
-#FUNCION ENUMERATE
-lista = ['C++', 'JavaScript', 'Python']
-    for i,  lenguaje in enumerate(lista):
-        print(i, lenguaje) => [(0, 'C++'), (1, 'JavaScript'), (2, 'Python')]
-#METODO GET
-    dic = {
-        1: 'Hola',
-        2:'Que tal',
-        3: 'La sacas a bailar',
-        4: 'Sexo'
-    }
-    print(dic.get(5, "The key doesn't exist")) => 'The key doesn't exist'| Because 5 isn't in the dict
-"""
-
