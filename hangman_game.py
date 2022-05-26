@@ -23,7 +23,10 @@ def hangman_game(dic, word_list):
                         hidden_list[i] = attempt
                 os.system('cls')
                 print(''.join(hidden_list))
-            
+                if (''.join(hidden_list) == (''.join(key))):
+                    print("You are the winner ")
+                    break      
+                 
 def slices(word):
     list_characters = []
     for i in range(len(word)):
