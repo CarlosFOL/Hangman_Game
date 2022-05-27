@@ -5,22 +5,45 @@ import random
 
 def guess_the_word(word_in_slices, random_word):
         hidden_list = []
+        remaining_lives = 3
+        score = 0
         for i in range(len(word_in_slices)):
             hidden_list.append('-')
         print(''.join(hidden_list))
         for i in range(len(random_word)+3):
             attempt = input('')
+            fails = len(word_in_slices)
             try:
                 if attempt.isnumeric():
                     raise ValueError("Only strings are allowed")
                 for i, character in enumerate(word_in_slices):
                     if character == attempt:
                         hidden_list[i] = attempt
-                        print('Perfect +100')
+                        print('+100')
+                        score += 100
+                    else:
+                        fails = fails - 1
+                if fails == 0:
+                    print('-50')
+                    score = score - 50
+                    remaining_lives = remaining_lives- 1
+                    if remaining_lives == 0:
+                        print(f"""
+ _____________________
+    You are a loser  
+    Score = {score}  
+ ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+""")
+                        break
                 os.system('cls')
                 print(''.join(hidden_list))
                 if (''.join(hidden_list) == (''.join(word_in_slices))):
-                    print("You are the winner ")
+                    print(f"""
+ _______________________
+    You are the winner 
+     Score: {score}     
+ ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+""")
                     break
             except ValueError as ve:
                 print(ve)
