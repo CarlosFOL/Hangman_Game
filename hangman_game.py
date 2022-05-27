@@ -21,14 +21,14 @@ def guess_the_word(word_in_slices, random_word):
                 print(''.join(hidden_list))
                 if (''.join(hidden_list) == (''.join(word_in_slices))):
                     print("You are the winner ")
-                    break   
+                    break
             except ValueError as ve:
                 print(ve)
                 break
 
 
 def hangman_game(dic, word_list):
-    random_nummber = random.choice(range(0, 118))
+    random_nummber = random.choice(range(0, 172))
     for i, word in enumerate(word_list):
         if i == random_nummber:
             random_word = word
@@ -83,7 +83,7 @@ def run():
 
 """)
     with open('./archivos/data.txt', 'r', encoding="utf-8") as f:
-        words_list = [i.strip('\n') for i in f]   
+        words_list = [i.strip('\n') for i in f] 
     database(words_list)
 
 if __name__=='__main__':
