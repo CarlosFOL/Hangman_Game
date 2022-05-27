@@ -3,36 +3,41 @@
 import os
 import random
 
-def hangman_game(dic, word_list):
-    print("""
- ___________________
-|                   |
-|   Guess the word  |
-|___________________|
-    """)
-    hidden_list = []
-    random_nummber = random.choice(range(0, 118))
-    for i, word in enumerate(word_list):
-        if i == random_nummber:
-            key = word
-    print(key)
-    for k, v in dic.items():
-        if k == key:
-            word_in_slices = v
-            for i in range(len(word_in_slices)):
-                hidden_list.append('-')
-            print(''.join(hidden_list))
-            for i in range(len(key)+3):
-                attempt = input('')
+def guess_the_word(word_in_slices, random_word):
+        hidden_list = []
+        for i in range(len(word_in_slices)):
+            hidden_list.append('-')
+        print(''.join(hidden_list))
+        for i in range(len(random_word)+3):
+            attempt = input('')
+            try:
+                if attempt.isnumeric():
+                    raise ValueError("Only strings are allowed")
                 for i, character in enumerate(word_in_slices):
                     if character == attempt:
                         hidden_list[i] = attempt
+                        print('Perfect +100')
                 os.system('cls')
                 print(''.join(hidden_list))
-                if (''.join(hidden_list) == (''.join(key))):
+                if (''.join(hidden_list) == (''.join(word_in_slices))):
                     print("You are the winner ")
-                    break      
-                 
+                    break   
+            except ValueError as ve:
+                print(ve)
+                break
+
+
+def hangman_game(dic, word_list):
+    random_nummber = random.choice(range(0, 118))
+    for i, word in enumerate(word_list):
+        if i == random_nummber:
+            random_word = word
+    print(random_word)
+    for key, value in dic.items():
+        if key == random_word:
+            word_in_slices = value
+            guess_the_word(word_in_slices, random_word)           
+
 def slices(word):
     list_characters = []
     for i in range(len(word)):
